@@ -6,7 +6,7 @@ import java.util.Date;
  * task表DO对象
  * 
  * @author HeChen
-@university King's College London
+ * @university King's College London
  **/
 public class Task {
     /**  */
