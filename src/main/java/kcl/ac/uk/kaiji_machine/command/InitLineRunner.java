@@ -1,6 +1,6 @@
 package kcl.ac.uk.kaiji_machine.command;
 
-import kcl.ac.uk.kaiji_machine.scheduledTask.ScheduledTaskService;
+import kcl.ac.uk.kaiji_machine.service.impl.ScheduledTaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class InitLineRunner implements CommandLineRunner {
 
     @Autowired
-    ScheduledTaskService scheduledTaskService;
+    ScheduledTaskServiceImpl scheduledTaskService;
 
     @Override
     public void run(String... args) throws Exception {

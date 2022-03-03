@@ -3,11 +3,8 @@ package kcl.ac.uk.kaiji_machine.service.impl;
 import kcl.ac.uk.kaiji_machine.dao.Task;
 import kcl.ac.uk.kaiji_machine.dao.TaskExample;
 import kcl.ac.uk.kaiji_machine.mapper.TaskMapper;
-import kcl.ac.uk.kaiji_machine.scheduledTask.ScheduledTaskService;
 import kcl.ac.uk.kaiji_machine.service.TaskService;
-import kcl.ac.uk.kaiji_machine.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

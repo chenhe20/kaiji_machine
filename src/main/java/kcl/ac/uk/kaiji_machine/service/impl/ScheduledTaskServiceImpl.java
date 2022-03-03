@@ -1,12 +1,12 @@
-package kcl.ac.uk.kaiji_machine.scheduledTask;
+package kcl.ac.uk.kaiji_machine.service.impl;
 
 import kcl.ac.uk.kaiji_machine.dao.Task;
-import kcl.ac.uk.kaiji_machine.service.impl.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,9 +19,11 @@ import java.util.concurrent.ScheduledFuture;
  */
 
 @Component
-public class ScheduledTaskService {
+public class ScheduledTaskServiceImpl {
 
     private final String TASK_CLASS_PREFIX = "kcl.ac.uk.kaiji_machine.scheduledTask.";
+    private final String FIELD_NAME = "name";
+    private final String FIELD_CRON = "cron";
 
     @Autowired
     TaskServiceImpl taskService;
@@ -47,18 +49,17 @@ public class ScheduledTaskService {
         String taskName = task.getName();
         String cron = task.getCron();
 
-        try {
-            Class<?> clazz = Class.forName(TASK_CLASS_PREFIX + taskName);
-            Object oTask = clazz.newInstance();
+        Class<?> clazz = Class.forName(TASK_CLASS_PREFIX + taskName);
+        Constructor<?> constructor = clazz.getDeclaredConstructor(Task.class);
+        Object oTask = constructor.newInstance(task);
+
             ScheduledFuture<?> future = threadPoolTaskScheduler
                     .schedule((Runnable) oTask, new CronTrigger(cron));
             tasks.put(taskName, future);
 
-            System.out.println("new task created with cron: " + cron);
+            System.out.println("Task" +taskName + " with cron: " + cron + "has been scheduled");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void deleteTask(Task task) {

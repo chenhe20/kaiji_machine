@@ -1,0 +1,1 @@
+print("this is testTask by python")

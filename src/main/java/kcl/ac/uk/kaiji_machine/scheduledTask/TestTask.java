@@ -2,10 +2,9 @@ package kcl.ac.uk.kaiji_machine.scheduledTask;
 
 
 import kcl.ac.uk.kaiji_machine.dao.Task;
-import kcl.ac.uk.kaiji_machine.service.impl.TaskServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * @author He Chen
@@ -13,33 +12,38 @@ import java.time.LocalDateTime;
  * @ID 21044375
  */
 
-public class TestTask extends abstractTask{
-
-    @Autowired
-    TaskServiceImpl taskService;
+public class TestTask extends AbstractTask {
 
     private final String TASK_NAME = "TestTask";
+    private final String PY_SCRIPT_SUFFIX = "/test_task.py";
+    private final String PY_SCRIPT_PATH = super.PY_FILE_PATH_PREFIX + this.PY_SCRIPT_SUFFIX;
 
-    TestTask() {
-        System.out.println("task created");
+    public TestTask(Task task) {
+        super(task);
     }
-    //private String cron;
 
-//    public TestTask() {
-//        setCron();
-//    }
+    public TestTask(String name, String cron) {
+        super(name, cron);
+    }
 
-//    private void setCron() {
-//        Task task = taskService.queryTaskByName(TASK_NAME);
-//        this.cron = task.getCron();
-//    }
-//
-//    private String getCron() {
-//        return this.cron;
-//    }
 
     @Override
-    public void run() {
-        System.out.println("任务执行时间：" + LocalDateTime.now());
+    public void doTask() throws Exception{
+
+            System.out.println("path is "+ PY_SCRIPT_PATH);
+            String COMMAND = "python3 " + PY_SCRIPT_PATH;
+
+            Process p = Runtime.getRuntime().exec(COMMAND);
+            BufferedReader  br = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+            br.close();
+            p.waitFor();
+
     }
+
+
 }

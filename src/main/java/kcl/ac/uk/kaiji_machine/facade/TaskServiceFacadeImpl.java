@@ -1,7 +1,7 @@
 package kcl.ac.uk.kaiji_machine.facade;
 
 import kcl.ac.uk.kaiji_machine.dao.Task;
-import kcl.ac.uk.kaiji_machine.scheduledTask.ScheduledTaskService;
+import kcl.ac.uk.kaiji_machine.service.impl.ScheduledTaskServiceImpl;
 import kcl.ac.uk.kaiji_machine.service.impl.TaskServiceImpl;
 import kcl.ac.uk.kaiji_machine.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class TaskServiceFacadeImpl {
     TaskServiceImpl taskService;
 
     @Autowired
-    ScheduledTaskService scheduledTaskService;
+    ScheduledTaskServiceImpl scheduledTaskService;
 
     public void stopTask(TaskVO taskVO) throws Exception{
         //TODO: 1.validate task exists 2.validate the stop status
