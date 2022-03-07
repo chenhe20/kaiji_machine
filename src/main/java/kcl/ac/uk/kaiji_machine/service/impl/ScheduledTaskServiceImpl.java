@@ -16,6 +16,7 @@ import java.util.concurrent.ScheduledFuture;
  * @author He Chen
  * @university King's College London
  * @ID 21044375
+ * 管理springboot定时任务
  */
 
 @Component

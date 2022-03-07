@@ -1,6 +1,6 @@
 package kcl.ac.uk.kaiji_machine.scheduledTask;
 
-import kcl.ac.uk.kaiji_machine.util.propertiesUtil;
+import kcl.ac.uk.kaiji_machine.util.PropertiesUtils;
 import kcl.ac.uk.kaiji_machine.dao.Task;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,12 @@ import java.time.LocalDateTime;
 
 public abstract class AbstractTask implements Runnable{
 
-    public String PY_FILE_PATH_PREFIX = propertiesUtil.getProperty("python-script.path");
+    protected final String PY_SCRIPT_PREFIX = PropertiesUtils.getProperty("python-script.path");
+    protected String PY_SCRIPT_SUFFIX;
+
+    protected String generateCommand() {
+        return "python3 " + PY_SCRIPT_PREFIX + PY_SCRIPT_SUFFIX ;
+    }
 
     public String getName() {
         return name;
@@ -47,7 +52,7 @@ public abstract class AbstractTask implements Runnable{
         System.out.println("task" + name + " created");
     }
 
-    public abstract void doTask() throws Exception;
+    abstract void doTask() throws Exception;
 
     @Override
     public void run() {
@@ -56,6 +61,6 @@ public abstract class AbstractTask implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Task" + this.name + "being executed：" + LocalDateTime.now());
+        System.out.println("Task: " + this.name + " being executed at：" + LocalDateTime.now());
     }
 }

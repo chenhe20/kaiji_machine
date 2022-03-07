@@ -13,7 +13,8 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @PropertySource(value = {"classpath:application.properties"})
-public class propertiesUtil implements EnvironmentAware {
+public class PropertiesUtils implements EnvironmentAware {
+
     private static Environment env;
 
     public static String getProperty(String key) {
@@ -22,6 +23,6 @@ public class propertiesUtil implements EnvironmentAware {
 
     @Override
     public void setEnvironment(Environment env) {
-        propertiesUtil.env = env;
+        PropertiesUtils.env = env;
     }
 }
