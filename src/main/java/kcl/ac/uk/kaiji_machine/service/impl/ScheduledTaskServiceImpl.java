@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.concurrent.ScheduledFuture;
  * 管理springboot定时任务
  */
 
-@Component
+@Service
 public class ScheduledTaskServiceImpl {
 
     private final String TASK_CLASS_PREFIX = "kcl.ac.uk.kaiji_machine.scheduledTask.";

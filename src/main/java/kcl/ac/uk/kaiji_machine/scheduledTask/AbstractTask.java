@@ -2,6 +2,7 @@ package kcl.ac.uk.kaiji_machine.scheduledTask;
 
 import kcl.ac.uk.kaiji_machine.util.PropertiesUtils;
 import kcl.ac.uk.kaiji_machine.dao.Task;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +11,6 @@ import java.time.LocalDateTime;
  * @university King's College London
  * @ID 21044375
  */
-
 
 public abstract class AbstractTask implements Runnable{
 

@@ -36,6 +36,7 @@ public class ExcgRateTask extends AbstractTask {
 
     @Override
     public void doTask() throws Exception{
+        //get connection
         Document document = Jsoup.connect(URL).get();
         Elements gbpElements = document.select(selector);
 
@@ -44,25 +45,17 @@ public class ExcgRateTask extends AbstractTask {
         Double cashBuyingRate = Double.valueOf(gbpElements.select("> td:nth-child(3)").html());
         Double sellingRate = Double.valueOf(gbpElements.select("> td:nth-child(4)").html());
         Double cashSellingRate = Double.valueOf(gbpElements.select("> td:nth-child(5)").html());
-
         String cnPubTimeOrigin = gbpElements.select("> td:nth-child(7)").html();
         cnPubTimeOrigin = cnPubTimeOrigin.substring(0, cnPubTimeOrigin.length() - 6);
         //Date cnPubTime = DateUtil.formatToDate(cnPubTimeOrigin, DateUtil.INSERT_FORMAT);
-
         Date date = new Date();
 
         ExcgRate excgRate = new ExcgRate().setCurrencyName(currencyName).setBuyingRate(buyingRate)
                 .setCashBuyingRate(cashBuyingRate).setCashSellingRate(cashSellingRate)
                 .setSellingRate(sellingRate).setCreatedTime(date);
 
+        // insert into mongodb
         excgRateService = SpringContextUtils.getApplicationContext().getBean(ExcgRateServiceImpl.class);
-
-        try {
-            excgRateService.addExcgRate(excgRate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        excgRateService.addExcgRate(excgRate);
     }
 }
