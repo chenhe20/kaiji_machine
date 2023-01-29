@@ -26,6 +26,7 @@ public class GlobalDefaultExceptionHandler {
             baseResult.setCode(((BaseException) e).getCode());
             baseResult.setDesc(((BaseException) e).getDesc());
         } else {
+            e.printStackTrace();
             baseResult.setCode(ErrorCodeEnum.SYSTEM_ERROR.getCode());
             baseResult.setDesc(ErrorCodeEnum.SYSTEM_ERROR.getDesc());
         }
