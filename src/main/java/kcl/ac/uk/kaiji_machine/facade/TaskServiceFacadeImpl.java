@@ -7,6 +7,8 @@ import kcl.ac.uk.kaiji_machine.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author He Chen
  * @university King's College London
@@ -30,6 +32,7 @@ public class TaskServiceFacadeImpl {
 
         // update task
         task.setStopStatus(true);
+        task.setModifiedDate(null);
         taskService.updateTask(task);
 
         // update scheduled task
@@ -44,6 +47,7 @@ public class TaskServiceFacadeImpl {
 
         // update task
         task.setStopStatus(false);
+        task.setModifiedDate(null);
         taskService.updateTask(task);
 
         // update scheduled task
@@ -60,8 +64,14 @@ public class TaskServiceFacadeImpl {
         task.setCron(taskVO.getCron());
         taskService.updateTask(task);
 
-        // update scheduled task
-        scheduledTaskService.deleteTask(task);
-        scheduledTaskService.scheduleTask(task);
+        // update scheduled task if task is in service
+        if (task.getStopStatus() != true) {
+            scheduledTaskService.deleteTask(task);
+            scheduledTaskService.scheduleTask(task);
+        }
+    }
+
+    public List<Task> queryAllTask() {
+        return taskService.queryAllTask();
     }
 }
