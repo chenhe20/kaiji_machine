@@ -1,7 +1,6 @@
 package kcl.ac.uk.kaiji_machine.service.impl;
 
 import kcl.ac.uk.kaiji_machine.service.MailService;
-import kcl.ac.uk.kaiji_machine.util.PropertiesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -68,7 +67,7 @@ public class MailServiceImpl implements MailService {
 
     public String collectExcgRate() {
         return excgRateService
-                .analysisExcgRate(excgRateService.queryRecentExcgRate());
+                .analyseExcgRate(excgRateService.queryRecentExcgRate());
     }
 
     public String generateBodySuffix() {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,9 @@ public class ExcgRateServiceImpl implements ExcgRateService {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     public void addExcgRate(ExcgRate excgRate) {
         mongoTemplate.insert(excgRate);
     }
@@ -32,11 +36,16 @@ public class ExcgRateServiceImpl implements ExcgRateService {
         query.limit(10);
         query.with(Sort.by(Sort.Order.desc("createdTime")));
         List<ExcgRate> excgRates = mongoTemplate.find(query, ExcgRate.class);
+        ExcgRate excgRate = excgRates.get(0);
+
+        // Redis cache
+        // redisTemplate.opsForValue().set("excgRate", excgRate);
+
         return excgRates;
     }
 
     @Override
-    public String analysisExcgRate(List<ExcgRate> excgRates) {
+    public String analyseExcgRate(List<ExcgRate> excgRates) {
 
         StringBuffer tableEle = new StringBuffer("<div><H1>Exchange Rate</H1><table>" +
                 "<tr>\n" +
