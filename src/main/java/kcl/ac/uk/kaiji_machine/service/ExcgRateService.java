@@ -15,6 +15,6 @@ public interface ExcgRateService {
 
     public List<ExcgRate> queryRecentExcgRate();
 
-    public String analysisExcgRate(List<ExcgRate> excgRates);
+    public String analyseExcgRate(List<ExcgRate> excgRates);
 
 }
