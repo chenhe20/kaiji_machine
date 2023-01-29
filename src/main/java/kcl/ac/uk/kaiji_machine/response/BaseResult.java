@@ -13,6 +13,4 @@ import lombok.experimental.Accessors;
 public class BaseResult {
    private String desc;
    private String code;
-
-
 }
