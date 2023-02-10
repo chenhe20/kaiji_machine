@@ -52,6 +52,8 @@ public abstract class AbstractTask implements Runnable{
         System.out.println("task" + name + " created");
     }
 
+    public AbstractTask() {}
+
     abstract void doTask() throws Exception;
 
     @Override
