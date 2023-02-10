@@ -1,9 +1,8 @@
 package kcl.ac.uk.kaiji_machine.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * @author He Chen
@@ -14,6 +13,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    UserPermissionInterceptor userPermissionInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+        interceptorRegistry.addInterceptor(userPermissionInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/task-mgt/all")
+                .excludePathPatterns("/info-query/**")
+                .excludePathPatterns("/user/**")
+                .excludePathPatterns("/blog/**");
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
