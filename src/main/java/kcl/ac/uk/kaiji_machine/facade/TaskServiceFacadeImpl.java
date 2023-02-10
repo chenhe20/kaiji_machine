@@ -3,7 +3,7 @@ package kcl.ac.uk.kaiji_machine.facade;
 import kcl.ac.uk.kaiji_machine.dao.Task;
 import kcl.ac.uk.kaiji_machine.service.impl.ScheduledTaskServiceImpl;
 import kcl.ac.uk.kaiji_machine.service.impl.TaskServiceImpl;
-import kcl.ac.uk.kaiji_machine.vo.TaskVO;
+import kcl.ac.uk.kaiji_machine.dto.TaskDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +24,11 @@ public class TaskServiceFacadeImpl {
     @Autowired
     ScheduledTaskServiceImpl scheduledTaskService;
 
-    public void stopTask(TaskVO taskVO) throws Exception{
+    public void stopTask(TaskDto taskDto) throws Exception{
         //TODO: 1.validate task exists 2.validate the stop status
 
         // query task
-        Task task = taskService.queryTaskByName(taskVO.getName());
+        Task task = taskService.queryTaskByName(taskDto.getName());
 
         // update task
         task.setStopStatus(true);
@@ -39,11 +39,11 @@ public class TaskServiceFacadeImpl {
         scheduledTaskService.deleteTask(task);
     }
 
-    public void startTask(TaskVO taskVO) throws Exception{
+    public void startTask(TaskDto taskDto) throws Exception{
         //TODO: 1.validate task exists 2.validate the stop status
 
         // query task
-        Task task = taskService.queryTaskByName(taskVO.getName());
+        Task task = taskService.queryTaskByName(taskDto.getName());
 
         // update task
         task.setStopStatus(false);
@@ -54,14 +54,14 @@ public class TaskServiceFacadeImpl {
         scheduledTaskService.scheduleTask(task);
     }
 
-    public void updateTaskCron(TaskVO taskVO) throws Exception {
+    public void updateTaskCron(TaskDto taskDto) throws Exception {
         //TODO: validate task exists
 
         // query task
-        Task task = taskService.queryTaskByName(taskVO.getName());
+        Task task = taskService.queryTaskByName(taskDto.getName());
 
         // update task
-        task.setCron(taskVO.getCron());
+        task.setCron(taskDto.getCron());
         taskService.updateTask(task);
 
         // update scheduled task if task is in service
