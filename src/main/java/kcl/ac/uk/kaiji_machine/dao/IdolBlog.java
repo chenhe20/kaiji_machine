@@ -1,5 +1,6 @@
 package kcl.ac.uk.kaiji_machine.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,7 +21,7 @@ import java.util.Date;
 public class IdolBlog {
 
     @MongoId
-    private Long ID;
+    private String ID;
 
     @Field("member_name")
     private String memberName;
@@ -34,6 +35,7 @@ public class IdolBlog {
     private String title;
 
     @Field("post_time")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date postTime;
 
     private Date createdTime;
