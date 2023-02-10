@@ -10,7 +10,10 @@ import lombok.Data;
 
 public enum ErrorCodeEnum {
     SUCCESS("000", "SUCCESS"),
-    SYSTEM_ERROR("001", "SYSTEM ERROR");
+    SYSTEM_ERROR("001", "SYSTEM ERROR"),
+    INVALID_REQUEST("002", "INVALID REQUEST"),
+    FAIL("003", "OPERATION FAILED"),
+    AUTHENTICATION_FAIL("004","AUTHENTICATION FAILED");
 
     public String getCode() {
         return code;
