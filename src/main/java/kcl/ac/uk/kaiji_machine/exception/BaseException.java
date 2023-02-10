@@ -17,8 +17,8 @@ public class BaseException extends RuntimeException {
     private String desc;
 
     public BaseException(ErrorCodeEnum errorCodeEnum) {
-        super(errorCodeEnum.getDesc());
         this.code = errorCodeEnum.getCode();
+        this.desc = errorCodeEnum.getDesc();
     }
 
 }
