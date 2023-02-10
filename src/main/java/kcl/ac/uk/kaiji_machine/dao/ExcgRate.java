@@ -1,5 +1,6 @@
 package kcl.ac.uk.kaiji_machine.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,5 +24,6 @@ public class ExcgRate {
     Double sellingRate;
     Double cashSellingRate;
     Date cnPubTime;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date createdTime;
 }
