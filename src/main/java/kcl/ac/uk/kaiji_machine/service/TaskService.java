@@ -1,7 +1,6 @@
 package kcl.ac.uk.kaiji_machine.service;
 
 import kcl.ac.uk.kaiji_machine.dao.Task;
-import kcl.ac.uk.kaiji_machine.vo.TaskVO;
 
 import java.util.List;
 
