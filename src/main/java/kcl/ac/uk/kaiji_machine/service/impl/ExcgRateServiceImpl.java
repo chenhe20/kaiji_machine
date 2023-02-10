@@ -2,6 +2,7 @@ package kcl.ac.uk.kaiji_machine.service.impl;
 
 import kcl.ac.uk.kaiji_machine.dao.ExcgRate;
 import kcl.ac.uk.kaiji_machine.service.ExcgRateService;
+import kcl.ac.uk.kaiji_machine.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -34,7 +35,7 @@ public class ExcgRateServiceImpl implements ExcgRateService {
     public List<ExcgRate> queryRecentExcgRate() {
         Query query = new Query();
         query.limit(10);
-        query.with(Sort.by(Sort.Order.desc("createdTime")));
+        query.with(Sort.by(Sort.Order.desc("_id")));
         List<ExcgRate> excgRates = mongoTemplate.find(query, ExcgRate.class);
         ExcgRate excgRate = excgRates.get(0);
 
