@@ -25,7 +25,6 @@ public class MailServiceImpl implements MailService {
 
     @Value("${mail-service.to}")
     private String to;
-    private StringBuffer mailBody = new StringBuffer();
 
     @Autowired
     JavaMailSender mailSender;
@@ -44,7 +43,8 @@ public class MailServiceImpl implements MailService {
         helper.setSubject(generateSubject());
 
         // generate content
-        this.mailBody.append(generateBodyPrefix())
+        StringBuffer mailBody = new StringBuffer();
+        mailBody.append(generateBodyPrefix())
                 .append(collectExcgRate())
                 .append(generateBodySuffix());
 
