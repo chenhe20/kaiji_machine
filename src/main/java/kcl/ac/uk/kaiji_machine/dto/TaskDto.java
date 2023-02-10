@@ -1,4 +1,4 @@
-package kcl.ac.uk.kaiji_machine.vo;
+package kcl.ac.uk.kaiji_machine.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 
 @Data
-public class TaskVO {
+public class TaskDto {
 
     /**  */
     private String name;
